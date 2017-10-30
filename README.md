@@ -1,2 +1,2 @@
 # CodeCC
-Social Network for Bootcampers
+Social Network
