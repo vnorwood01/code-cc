@@ -1,0 +1,44 @@
+
+
+        <div class="page-header">
+            <div style="background:RGBA(255, 255, 255, 1) !important" class="jumbotron">
+            <h1 id="header">SCANDAL PRESS</h1>
+
+        <div class='post-box'>
+            <select id="user-selector" ng-model="newUserId">
+            <option value=''>Select User</option>
+            <option value='{{ u.id }}' ng-repeat="u in users">{{ u.firstname + ' ' + u.lastname }}</option>
+            </select>
+            <input type="text" placeholder="Write your post here!" id="post-field" ng-model="newContent">
+            <button class="fancy-button" id="post-btn" ng-click="createPost()">Post!</button>
+        </div>
+            
+            <!-- <div class="chirp-box">
+            <div class="input-group input-group-lg">
+            <span class="input-group btn">
+            <input class="form-control input-lg" type="text" placeholder="Chirp your mind..." id="chirp-field">
+
+            <select class="input-small" id="user-selector">
+                <option class="form-control" selected disabled>Select User</option> 
+            </select> 
+
+            <button type="button" class="btn btn-warning btn-default" id="chirp-btn">Chirp!</button>  -->
+  <!--           </span>
+            </div>
+            </div> -->
+
+        </div>
+
+        </div>
+        
+       
+    <div class='post-box'>
+    <select id="user-selector" ng-model="newUserId">
+        <option value=''>Select User</option>
+        <option value='{{ u.id }}' ng-repeat="u in users">{{ u.firstname + ' ' + u.lastname }}</option>
+    </select>
+    <input type="text" placeholder="Write your post here!" id="post-field" ng-model="newContent">
+    <button class="fancy-button" id="post-btn" ng-click="createPost()">Post!</button>
+    </div>
+
+    

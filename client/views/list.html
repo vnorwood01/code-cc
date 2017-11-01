@@ -1,0 +1,49 @@
+
+
+        <div class="page-header">
+
+            
+
+        <div style="background:RGBA(255, 255, 255, .9) !important" class="jumbotron">
+            <h1 id="header">SCANDAL PRESS</h1>
+            <button type="button" ng-click='/#!/newpost' class="btn" >WRITE FOR US</button>
+            
+        </div>
+
+        </div>
+        <!-- <div class="chirp-box">
+            <div class="input-group input-group-lg">
+            <span class="input-group btn">
+            <input class="form-control input-lg" type="text" placeholder="Chirp your mind..." id="chirp-field">
+
+            <select class="input-small" id="user-selector">
+                <option class="form-control" selected disabled>Select User</option> 
+            </select> 
+
+            <button type="button" class="btn btn-warning btn-default" id="chirp-btn">Chirp!</button> 
+            </span> -->
+            
+       
+    <!-- <div class='post-box'>
+    <select id="user-selector" ng-model="newUserId">
+        <option value=''>Select User</option>
+        <option value='{{ u.id }}' ng-repeat="u in users">{{ u.firstname + ' ' + u.lastname }}</option>
+    </select>
+    <input type="text" placeholder="Write your post here!" id="post-field" ng-model="newContent">
+    <button class="fancy-button" id="post-btn" ng-click="createPost()">Post!</button>
+    </div> -->
+
+
+    <div class="container" id="post-list" ng-controller="PostListController">
+    <a ng-href="/#!/posts/{{ p.id }}" ng-repeat="p in posts">
+        <div class="post">
+            <h3 id="title">{{ p.title }}</h3>
+            <h4 id="content">{{ p.content }}</h4>
+            <!-- <p>{{ u.firstname }}</p> -->
+            <p id="date">{{ p.createdAt | date: 'short' }}</p>
+        </div>
+    </a>
+    </div>
+   
+
+        
