@@ -6,22 +6,6 @@ var routeChecker = require('./middleware/routeChecker.mw');
 
 var app = express();
 
-// var pool = mysql.createPool({
-//   connectionLimit: 10,
-//   host: "localhost",
-//   user: "AngularD",
-//   password: "xyz789",
-//   database: "AngularBlog"
-// });
-
-var pool = mysql.createPool({
-  connectionLimit: 10,
-  host: "us-cdbr-iron-east-05.cleardb.net",
-  user: "b606b039fcca59",
-  password: "686e2d62",
-  database: "heroku_5cd555101543687"
-});
-
 var clientPath = path.join(__dirname, "../client");
 
 app.use(express.static(clientPath));
