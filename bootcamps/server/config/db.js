@@ -1,5 +1,6 @@
 var mysql = require('mysql');
 
+//CONNOR will prerender
 var pool = mysql.createPool({
     // connectionLimit: 10,
     // host: "",
