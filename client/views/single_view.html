@@ -1,8 +1,8 @@
 
 
         <div class="page-header">.
-        <div style="background:RGBA(255, 255, 255, .9) !important" class="jumbotron">
-            <h1 id="header">SCANDAL PRESS</h1>
+        <div class="jumbotron">
+            <h1 id="header">CC Social</h1>
 
             </div>
             </div>
@@ -11,10 +11,15 @@
     <div class="container" id="post-list" ng-controller="PostController">
     <!-- <a ng-href="/posts/{{ p.id }}"> -->
         <div class="single-post">
-            <h3 id="title">{{ post.title }}</h3>
-            <h4 id="content">{{ post.content }}</h4>
-            <p id="date">{{ post.createdAt | date: 'short' }}</p>
+            <h3 id="title">{{ post.status }}</h3>
+            <!-- <h4 id="content">{{ post.content }}</h4> -->
+            <p id="date">{{ post.timestamp | date: 'short' }}</p>
         </div>
     <!-- </a> -->
+    </div>
+
+    <div>
+<!-- SCOPE REPLIES -->
+
     </div>
     

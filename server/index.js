@@ -6,12 +6,20 @@ var routeChecker = require('./middleware/routeChecker.mw');
 
 var app = express();
 
+// var pool = mysql.createPool({
+//   connectionLimit: 10,
+//   host: "localhost",
+//   user: "AngularD",
+//   password: "xyz789",
+//   database: "AngularBlog"
+// });
+
 var pool = mysql.createPool({
   connectionLimit: 10,
-  host: "localhost",
-  user: "Unknown",
-  password: "Unknown",
-  database: "Unknown"
+  host: "us-cdbr-iron-east-05.cleardb.net",
+  user: "b606b039fcca59",
+  password: "686e2d62",
+  database: "heroku_5cd555101543687"
 });
 
 var clientPath = path.join(__dirname, "../client");
@@ -45,7 +53,7 @@ app.route("/api/posts")
 
 app.route('/api/posts/:id')
     .get(function(req, res) {
-        row('GetOnePost', [req.params.id]) // create procedure GetOnePost
+        row('GetSinglePost', [req.params.id]) // create procedure GetOnePost
         .then(function(post) {
             console.log(post);
             res.send(post);
@@ -72,7 +80,7 @@ app.route('/api/posts/:id')
     });
 
 app.route("/api/users").get(function(req, res) {
-  rows("GetUsers") // create procedure to GetUsers
+  rows("GetAllUsers") // create procedure to GetUsers
     .then(function(users) {
       res.send(users);
     })
@@ -104,8 +112,6 @@ app.route("/api/categories").get(function(req, res) {
       res.sendStatus(500);
     });
 });
-
-
 
 app.listen(3000);
 
