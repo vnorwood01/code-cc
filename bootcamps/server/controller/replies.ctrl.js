@@ -1,44 +1,33 @@
 var express = require('express');
-var procedures = require('../procedures/bootcamps.proc');
+var procedures = require('../procedures/replies.proc');
 var router = express.Router();
 
 router.route('/')
 
     .get(function (req, res) {
         procedures.all()
-            .then(function (bootcamps) {
-                res.send(bootcamps);
+            .then(function (replies) {
+                res.send(replies);
             }).catch(function (err) {
                 console.log(err);
                 res.sendStatus(500);
             });
     })
+
     .post(function (req, res) {
-        var b = req.body;
-        procedures.create(b.name, b.stack, b.city, b.state, b.cost, b.listingpic)
+        procedures.create(req.body.reply, req.body.timestamp, req.body.username, req.body.profilepic)
             .then(function (id) {
-                res.status(201).send(id);
+                res.sendStatus(201).send(id);
             }).catch(function (err) {
                 console.log(err);
                 res.sendStatus(500);
-            });
+            })
     });
-
 
 router.route('/:id')
 
-    .get(function (req, res) {
-        procedures.readByid(req.params.id)
-            .then(function (bootcamp) {
-                res.send(bootcamp);
-            }).catch(function (err) {
-                console.log(err);
-                res.sendStatus(500);
-            });
-    })
-
     .put(function (req, res) {
-        procedures.update(req.params.id, req.body.name, req.body.stack, req.body.city,req.body.state, req.body.cost, req.body.listingpic)
+        procedures.update(req.params.id, req.body.reply, req.body.timestamp)
             .then(function () {
                 res.sendStatus(204);
             }).catch(function (err) {
@@ -46,6 +35,8 @@ router.route('/:id')
                 res.sendStatus(500);
             });
     })
+
+
     .delete(function (req, res) {
         procedures.destroy(req.params.id)
             .then(function () {
@@ -55,17 +46,5 @@ router.route('/:id')
                 res.sendStatus(500);
             });
     });
-
-router.route('/bystate/:id')
-
-    .get(function(req, res){
-        procedures.readBystate(req.params.id)
-        .then(function(state){
-            res.send(state);
-        }).catch(err);
-            console.log(err);
-            res.sendStatus(500);
-    });
-
 
 module.exports = router;

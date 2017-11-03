@@ -1,22 +1,27 @@
 var db = require('../config/db.js');
+//ADMIN AUTH?
 
 exports.all = function() {
-    return db.rows('GetBootcamps');
+    return db.rows('GetAllBootcamps');
 }
 
-exports.read = function(id) {
-    return db.row('GetBootcamp', [id]);
+exports.readByid = function(id){
+    return db.row('GetBootcampByID', [id])
 }
 
-exports.create = function(name, stack, city, cost, userid, categoryid) {
-    return db.row('InsertBootcamp', [name, stack, city, cost, userid, categoryid]);
+exports.readBystate = function(id, name, stack, city, state, cost, listingpic){
+    return db.row('GetBootcampsByState', [id, name, stack, city, state, cost, listingpic]);
 }
 
-// ADMIN ONLY CONNER?
-exports.update = function(name, stack, city, cost, userid, categoryid) {
-    return db.empty('UpdateBootcamp', [id, name, stack, city, cost, categoryid]);
+exports.create = function(id, name, stack, city, state, cost, listingpic) {
+    return db.row('CreateBootcamp', [id, name, stack, city, state, cost, listingpic]);
+}
+
+exports.update = function(id, name, stack, city, state, cost, listingpic) {
+    return db.empty('UpdateBootcamp', [id, name, stack, city, state, cost, listingpic]);
 }
 
 exports.destroy = function(id) {
     return db.empty('DeleteBootcamp', [id]);
 }
+

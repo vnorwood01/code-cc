@@ -3,7 +3,7 @@ var express = require('express');
 
 var clientPath = path.join(__dirname, '../../client');
 
-exports.isAsset = function(req, res, next) {
+exports.stateRouting = function(req, res, next) {
     if (isAsset(req.url)) {
         return next(); //call the next route handler
     } 

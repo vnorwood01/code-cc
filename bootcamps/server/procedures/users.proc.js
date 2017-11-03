@@ -1,19 +1,24 @@
-// CONNER 
+var db = require('../config/db');
+//ADMIN AUTH?
 
-// var db = require('../config/db');
+exports.all = function () {
+    return db.rows('GetAllUsers');
+}
 
-// exports.all = function() {
-//     return db.rows('GetUsers');
-// }
+exports.read = function (id) {
+    return db.row('GetOneUser', [id]);
+}
 
-// exports.read = function(id) {
-//     return db.row('GetUser', [id]);
-// }
+exports.create = function (id, firstname, lastname, email, username, bootcamp, profilepic, /*hash*/) {
+    return db.row('CreateUser', [id, firstname, lastname, email, username, bootcamp, profilepic, /*hash*/]);
+}
 
-// exports.readByEmail = function(email) {
-//     return db.row('GetUserByEmail', [email]);
-// }
+exports.update = function (id, firstname, lastname, email, username, bootcamp, profilepic) {
+    return db.row('UpdateUser', [id, firstname, lastname, email, username, bootcamp, profilepic]);
+}
 
-// exports.create = function(firstName, lastName, email, hash) {
-//     return db.row('InsertUser', [firstName, lastName, email, hash]);
-// }
+exports.destroy = function(id) {
+    return db.empty('DeleteUser', [id]);
+}
+
+//GetAllUsersByBootcamp to be added
