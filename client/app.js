@@ -4,11 +4,17 @@ angular.module('codecc', ['ngRoute', 'ngResource', 'codecc.controllers', 'codecc
     $routeProvider
     .when('/', {
         templateUrl: 'views/login.html', 
-        controller: 'HomeController' 
+        controller: 'LoginController',
+        // requiresLogin: true,
+        // requiresAdmin: true 
     })
     .when('/signup', {
         templateUrl: 'views/signup.html', 
         controller: 'SignupController' 
+    })
+    .when('/home', {
+        templateUrl: 'views/home.html', 
+        controller: 'HomeController' 
     })
     .when('/posts/:id', {
         templateUrl: 'views/one_post.html',
@@ -19,34 +25,34 @@ angular.module('codecc', ['ngRoute', 'ngResource', 'codecc.controllers', 'codecc
     })    
     .when('/codeplay/color-index', {
         templateUrl: 'views/color-index.html', //issue
+        controller: 'ColorGameController'
     })
     .when('/codeplay/multichoice', {
         templateUrl: 'views/multichoice.html', //issue
+        controller: 'MultichoiceController'
     })
     .when('/careers', {
-        templateUrl: 'views/careers.html',
-        //controller: 
+        templateUrl: 'views/careers.html'
     })
     .when('/bootcamps', {
         templateUrl: 'views/bootcamps.html', //issue
         //controller: 
     })
     .when('/resources', {
-        templateUrl: 'views/resources.html',
-        controller: 'BootcampsController'
+        templateUrl: 'views/resources.html'
     })
     .otherwise({
         redirectTo: '/'
     });
 }])
-// .run(['$rootScope', '$location', 'UserService', function($rootScope, $location, UserService) {
-//     $rootScope.$on('$routeChangeStart', function(event, nextRoute, previousRoute) {
-//         if (nextRoute.$$route.requiresLogin && !UserService.isLoggedIn()) {
-//             event.preventDefault();
-//             UserService.loginRedirect();
-//         } else if (nextRoute.$$route.requiresAdmin && !UserService.isAdmin()) {
-//             event.preventDefault();
-//             $location.replace().path('/');
-//         }
-//     });
-// }]);
+.run(['$rootScope', '$location', 'UserService', function($rootScope, $location, UserService) {
+    $rootScope.$on('$routeChangeStart', function(event, nextRoute, previousRoute) {
+        if (nextRoute.$$route.requiresLogin && !UserService.isLoggedIn()) {
+            event.preventDefault();
+            UserService.loginRedirect();
+        } else if (nextRoute.$$route.requiresAdmin && !UserService.isAdmin()) {
+            event.preventDefault();
+            $location.replace().path('/');
+        }
+    });
+}]);

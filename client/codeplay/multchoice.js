@@ -1,3 +1,5 @@
+angular.module('multichoice.controllers', [])
+
 (function() {
     
 var myQuestions = [

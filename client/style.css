@@ -16,6 +16,10 @@
 .hover:hover {
     background-color: white;
 }
+#logo {
+    margin-left: 2%; 
+    color: black;
+}
 /* GENERAL DIV CONTAINER ENDS */
 
 
