@@ -2,30 +2,6 @@ node_modules
 .variables
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#pre-selected node ignore package on GitHub
-
 # Logs
 logs
 *.log
