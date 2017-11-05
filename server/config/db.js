@@ -1,14 +1,14 @@
 var mysql = require('mysql');
 
-//CONNOR will prerender
 var pool = mysql.createPool({
     connectionLimit: 10,
-    host: "url",
-    user: "user",
-    password: "password",
-    database: "database"
+    host: "us-cdbr-iron-east-05.cleardb.net",
+    user: "b606b039fcca59",
+    password: "686e2d62",
+    database: "heroku_5cd555101543687"
 });
-exports.pool = pool;
+
+
 
 exports.rows = function(procedureName, args) {
     return callProcedure(procedureName, args)
@@ -40,14 +40,14 @@ function callProcedure(procedureName, args) {
                 var placeholders = '';
                 if (args && args.length > 0) {
                     for (var i = 0; i < args.length; i++) {
-                        if (i === args.length - 1) { // if we are on the last argument in the array
+                        if (i === args.length - 1) { 
                             placeholders += '?';
                         } else {
                             placeholders += '?,';
                         }
                     }
                 }
-                var callString = 'CALL ' + procedureName + '(' + placeholders + ');'; // CALL GetChirps();, or CALL InsertChirp(?,?,?);
+                var callString = 'CALL ' + procedureName + '(' + placeholders + ');'; 
                 connection.query(callString, args, function(err, resultsets) {
                     connection.release();
                     if (err) {

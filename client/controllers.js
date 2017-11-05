@@ -1,75 +1,101 @@
-var app = angular.module('codecc.controllers', []);
+angular.module('codecc.controllers', [])
 
-
-app.controller('PostListController', ['$scope', 'Post', 'User', function($scope, Post, User) {
-    function getPosts() {
-        $scope.posts = Post.query();
-    }
-    getPosts();
-
-    $scope.users = User.query();
-
-    $scope.createPost = function() {
-        var payload = {
-            content: $scope.newContent,
-            userid: $scope.newUserId
-        };
-        var p = new Post(payload);
-        p.$save(function(success) {
-            $scope.newcontent = '';
-            $scope.newUserId = '';
-            getPosts();
+.controller('LoginController', ['$scope', 'UserService', '$location', function($scope, UserService, $location) {
+    UserService.me().then(function() {
+        redirect();
+    });
+        
+    $scope.login = function() {
+        UserService.login($scope.email, $scope.password)
+        .then(function() {
+            redirect();
         }, function(err) {
             console.log(err);
         });
     }
-}]);
 
-// app.controller('PostController', ['$scope', 'Post', '$routeParams', function($scope, Post, $routeParams) {
-//     function getOnePost() {
-//         $scope.posts = Post.get({ id: $routeParams.someId });
-//     }
-//     getOnePost($routeParams.someId);
-
-// }]);
-
-// app.controller('PostController', ['$scope', 'Post', '$routeParams', function($scope, Post, $routeParams) {
-    
-//     $scope.post = Post.get({ id: $routeParams.someId });
-
-// }]);
-
-
-app.controller('PostController', ['$scope', 'Post', '$location', '$routeParams', function($scope, Post, $location, $routeParams) {
-    
-    $scope.post = Post.get({ id: $routeParams.someId });
-   
-    $scope.editPost = function() {
-        $location.path('/Posts/' + $routeParams.someId + '/update');
+    function redirect() {
+        var dest = $location.search().dest;
+        if (!dest) { dest = '/'; }
+        $location.replace().path(dest).search('dest', null);
     }
 
-    $scope.deletePost = function() {
-        if (confirm('Are you sure you want to delete this Post?')) {
+}])
+
+.controller('SignupController', ['$scope', 'User', function($scope, User) {
+    // $scope.users = User.query();
+
+    $scope.createUser = function() {
+        var u = new User($scope.newUser);
+        u.$save(function() {
+            $scope.newUser = {};
+            // $scope.users = User.query();
+        });
+    }
+
+    function redirect() {
+        var dest = $location.search().dest;
+        if (!dest) { dest = '/'; }
+        $location.replace().path(dest).search('dest', null);
+    }
+}])
+
+.controller('HomeController', ['$scope', 'Post', 'User', '$location', function($scope, Post, User, $location) {
+    $scope.users = User.query();
+    $scope.posts = Post.query();
+    //later make $scope.posts by followers
+     
+    $scope.save = function() {
+        var p = new Post($scope.post);
+        p.$save(function() {
+            $location.path('/');
+        }, function(err) {
+            console.log(err);
+        });
+    }
+}])
+
+.controller('PostReplyController', ['$scope', '$routeParams', '$location', '$resource', '$http', 'Post', 'Reply', function($scope, $routeParams, $location, $resource, $http, Post, Reply) {
+    //one_post.html
+    
+    $scope.post = Post.get({ id: $routeParams.id });
+    // $scope.replies = Reply.get({ id: $routeParams.id });
+    $http.get('/api/replies/' + $routeParams.id).then(function(response) {
+        this.$get = function() {
+        $scope.reply = response; 
+        //console.log(response); replies are binding because they will console.log but not show up in view
+        }
+    });
+
+    $scope.edit = function() {
+        $location.path('/' + $routeParams.id + '/update');
+    }
+
+    $scope.save = function() {
+        $scope.post.$update(function() {
+            $location.replace().path('/' + $routeParams.id);
+        });
+    }
+    $scope.delete = function() {
+        if (confirm('Are you sure you want to delete?')) {
             $scope.post.$delete(function() {
-                $location.replace().path('/Posts');
-            }, function(err) {
-                console.log(err);
+                $location.replace().path('/');
             });
         }
     }
-}]);
+}])
 
-app.controller('UpdatePostController', ['$scope', 'Post', '$location', '$routeParams', function($scope, Post, $location, $routeParams) {
-    $scope.post = Post.get({ id: $routeParams.someId });
-
-    $scope.updatePost = function() {
-        $scope.Post.$update(function() {
-            window.history.back();
+.controller('BootcampsController', ['$scope', '$resource', 'Bootcamp', 'User', '$location', function($scope, $resource, Bootcamp, User, $location) {
+    $scope.users = User.query();
+    // $scope.reviews = Review.query();
+    $scope.bootcamps = Bootcamp.query();
+      
+    $scope.save = function() {
+        var p = new Bootcamp($scope.bootcamps);
+        p.$save(function() {
+            $location.path('/bootcamps');
         }, function(err) {
             console.log(err);
         });
     }
 }]);
-
-
-app.controller

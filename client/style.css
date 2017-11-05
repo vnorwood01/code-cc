@@ -1,20 +1,72 @@
-.jumbotron {
-	top: 30px;
-	padding-bottom: 10px;
+/* GENERAL DIV CONTAINER BEGINS*/
+.container{
+    border: 1px solid lightgrey;
+    margin: 1%;
+    border-radius: 5px;
+}
+.jumbotron{
+    background-color: RGBA(244, 299, 244, .1) !important;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.hover:hover {
+    background-color: white;
+}
+/* GENERAL DIV CONTAINER ENDS */
+
+
+
+
+/* RESOURCES BEGINS*/
+#refh1 {
+    font-size: 28px;
+    line-height: 20px;
+    text-align: center;
+    color: green;
 }
 
-a:link {
-	color: black;
-	text-decoration: none;
+#ptext {
+    font-size: 20px;
+    text-align: center;
 }
 
-a:visited {
-	color: black;
+#explanationdiv {
+    background-color: lightgrey;
 }
+/* RESOURCES ENDS */
 
-a:hover {
-	color: orange;
-	text-decoration: none;
-}
 
-a:active{}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

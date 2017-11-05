@@ -1,15 +1,26 @@
-var app = angular.module('codecc.factories', []);
-
-
-
-app.factory('Post', ['$resource', function($resource) {
-    return $resource('/api/posts/:id', {id: '@id'}, {
+angular.module('codecc.factories', [])
+.factory('Post', ['$resource', function($resource) {
+    return $resource('/api/posts/:id', { id: '@id' }, {
         update: {
             method: 'PUT'
         }
     });
-}]);
-
-app.factory('User', ['$resource', function($resource) {
+}])
+.factory('User', ['$resource', function($resource) {
     return $resource('/api/users/:id');
-}]);
+    
+}])
+.factory('Reply', ['$resource', function($resource) {
+    return $resource('/api/replies/:id'), { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    }
+}])
+.factory('Bootcamp', ['$resource', function($resource){
+    return $resource('api/bootcamps'), {
+        update: {
+            method: 'PUT'
+        }
+    }
+}])
