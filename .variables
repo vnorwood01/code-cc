@@ -1,4 +1,0 @@
-export RDS_HOSTNAME=''
-export RDS_USER=''
-export RDS_PASSWORD=''
-export RDS_PRERENDER_TOKEN=''
