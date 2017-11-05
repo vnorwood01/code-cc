@@ -7,8 +7,7 @@ var pool = mysql.createPool({
     password: process.env.RDS_PASSWORD,
     database: "heroku_5cd555101543687"
 });
-
-
+exports.pool = pool;
 
 exports.rows = function(procedureName, args) {
     return callProcedure(procedureName, args)
